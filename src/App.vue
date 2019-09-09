@@ -44,8 +44,7 @@ export default {
   }
 }
 </script>
-
-<style>
+<style lang="scss">
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -61,5 +60,12 @@ blockquote{
   padding:10px;
   border-left: 4px  solid #409EFF;
 }
-
+.run {
+  .el-button{
+    margin: 0 10px;
+  }
+  .el-textarea {
+    margin-top: 10px;
+  }
+}
 </style>

@@ -11,11 +11,12 @@
             if (n && isNaN(n)) {
               throw "parameter is not a number!";
             }
-            if (n&lt;=0) {
+            if (n < 0) {
               throw "parameter is not a positive integer!";
             }
-            var res = 1n;
-            for(let i= 1;i&lt;= n;i++){
+            const num = BigInt(n);
+            let res = BigInt(1);
+            for(let i= BigInt(1);i<= num;i++){
               res = res * i;
             }
             return res;
@@ -29,16 +30,16 @@
     </section>
     <h3>平均运行时间</h3>
     <section>
-      270ms
+      76ms(系统: win10, chrome版本:76, 内存: 16g, cpu: i5)
     </section>
     <h3>运行</h3>
-    <section>
+    <section class="run">
        <el-input-number v-model="num" :min="1"></el-input-number>
        <el-button type="primary" @click="calc">calc</el-button>
        <span>耗时(ms)：{{time}}</span>
        <el-input
           type="textarea"
-          :rows="4"
+          :rows="6"
           v-model="result">
         </el-input>
     </section>
@@ -74,7 +75,7 @@ export default {
     },
     calc() {
       const start = (new Date()).getTime();
-      var a = console.time('1')
+      console.time('1')
       const res = this.factorial(this.num);
       console.timeEnd('1')
       const end = (new Date()).getTime();
