@@ -11,14 +11,14 @@
             if (n && isNaN(n)) {
               throw "parameter is not a number!";
             }
-            if (n&lt;=0) {
+            if (n<=0) {
               throw "parameter is not a positive integer!";
             }
-            var res = 1n;
-            for(let i= 1;i&lt;= n;i++){
-              res = res * i;
+            if (n === 1) {
+              return BigInt(1);
             }
-            return res;
+            const num = BigInt(n);
+            return num * this.factorial(n - 1);
           }
         </code>
       </pre>      
@@ -42,6 +42,12 @@
           v-model="result">
         </el-input>
     </section>
+    <h3>注意!</h3>
+    <section>
+      使用递归时，非常耗费内存，因为需要同时保存成千上百个调用帧，很容易发生“栈溢出”错误（stack overflow）。
+      当我们输入10000时，确实是发生了栈溢出。而当我们先输入一个较小的数，譬如5000，计算之后再己算10000，此时不会发生堆栈溢出。
+      可以看出，chrome内部帮我们做了优化，将部分调用帧保留在内存中，当发生类似的计算时，直接使用，提高了计算效率。
+    </section>
   </div>
 </template>
 
@@ -49,7 +55,7 @@
 export default {
   data() {
     return {
-      num: 10000,
+      num: 5000,
       result: '',
       time: '0'
     }
@@ -73,11 +79,11 @@ export default {
     },
     calc() {
       const start = (new Date()).getTime();
-      console.time('1')
+      console.time('2')
       const res = this.factorial(this.num);
-      console.timeEnd('1')
+      console.timeEnd('2')
       const end = (new Date()).getTime();
-      this.time = end - start;
+      this.time = end - start + 1;
       this.result = res.toString();
     }
   }
