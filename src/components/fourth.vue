@@ -1,13 +1,5 @@
 <template>
   <div class="fourth">
-    <h3>尾递归</h3>
-    <section>
-      <p>函数调用会在内存形成一个"调用记录"，又称"调用帧"（call frame），保存调用位置和内部变量等信息。如果在函数A的内部调用函数B，
-      那么在A的调用记录上方，还会形成一个B的调用记录。等到B运行结束，将结果返回到A，B的调用记录才会消失。如果函数B内部还调用函数C，
-      那就还有一个C的调用记录栈，以此类推。所有的调用记录，就形成一个"调用栈"</p>
-      <p>尾递归由于是函数的最后一步操作，所以不需要保留外层函数的调用记录，
-      因为调用位置、内部变量等信息都不会再用到了，只要直接用内层函数的调用记录，取代外层函数的调用记录就可以了</p>
-    </section>
     <h3>code</h3>
     <section>
       <pre>
@@ -19,11 +11,15 @@
             if (n && isNaN(n)) {
               throw "parameter is not a number!";
             }
-            if (n<=0) {
+            if (n < 0) {
               throw "parameter is not a positive integer!";
             }
-            if (n === 1) return total; 
-            return factorial(n - 1, BigInt(n) * BigInt(total));
+            const num = BigInt(n);
+            let res = BigInt(1);
+            for(let i= BigInt(1);i<= num;i++){
+              res = res * i;
+            }
+            return res;
           }
         </code>
       </pre>      
@@ -34,7 +30,7 @@
     </section>
     <h3>平均运行时间</h3>
     <section>
-      270ms
+      76ms(系统: win10, chrome版本:76, 内存: 16g, cpu: i5)
     </section>
     <h3>运行</h3>
     <section class="run">
@@ -43,16 +39,10 @@
        <span>耗时(ms)：{{time}}</span>
        <el-input
           type="textarea"
-          :rows="4"
+          :rows="6"
+          readonly
           v-model="result">
         </el-input>
-    </section>
-    <h3>注意!</h3>
-    <section>
-      <p>Chrome下使用尾递归写法的方法依旧出现调用栈溢出，原因在于：</p>
-      <ol>
-        <li>各大浏览器（除了safari）根本就没部署尾调用优化</li>
-      </ol>
     </section>
   </div>
 </template>

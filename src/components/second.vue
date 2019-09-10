@@ -40,9 +40,11 @@
        <el-input
           type="textarea"
           :rows="6"
+          readonly
           v-model="result">
         </el-input>
     </section>
+    
   </div>
 </template>
 
@@ -74,13 +76,17 @@ export default {
       return res;
     },
     calc() {
-      const start = (new Date()).getTime();
-      console.time('1')
-      const res = this.factorial(this.num);
-      console.timeEnd('1')
-      const end = (new Date()).getTime();
-      this.time = end - start;
-      this.result = res.toString();
+      try {
+        const start = (new Date()).getTime();
+        console.time('1')
+        const res = this.factorial(this.num);
+        console.timeEnd('1')
+        const end = (new Date()).getTime();
+        this.time = end - start;
+        this.result = res.toString();
+      } catch (e) {
+        this.result = e;
+      }
     }
   }
 }
