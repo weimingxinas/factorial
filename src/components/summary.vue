@@ -48,6 +48,7 @@
     </section>
     <h3>3. 图例</h3>
     <chart :options="option"></chart>
+    <p class="mask">1! - 15!</p>
   </div>
 </template>
 <script>
@@ -185,3 +186,8 @@ export default {
   }
 }
 </script>
+<style lang="scss">
+ .mask {
+   margin-left: 300px;
+ }
+</style>
