@@ -12,7 +12,7 @@
             if (n && isNaN(n)) {
               throw "parameter is not a number!";
             }
-            if (n&lt;=0) {
+            if (n&lt;0) {
               throw "parameter is not a positive integer!";
             }
             var res = 1;
