@@ -29,7 +29,7 @@
       <p>鉴于阶乘的特殊性，可以拆分为多个子问题。我们这里将10000拆解为5000!乘以(5001 * ... * 10000)。
         主线程和worker线程分别计算后相乘。</p>
       <div class="run">
-        <el-input-number v-model="num" :min="1"></el-input-number>
+        <el-input-number v-model="num"></el-input-number>
         <el-button type="primary" @click="calc">calc</el-button>
         <div>
           <p>worker耗时(ms)：{{workerTime}}</p>
@@ -132,7 +132,7 @@ export default {
     }
     this.worker = new Worker('worker.js');
     this.worker.onerror = (event) =>{
-       this.$message('worker.js:'+event.message);
+       this.$message('worker线程出错啦!原因是:' + (event.message || e));
     };
   },
   methods: {
@@ -143,7 +143,7 @@ export default {
       if (n && isNaN(n)) {
         throw "parameter is not a number!";
       }
-      if (n<=0) {
+      if (n<0) {
         throw "parameter is not a positive integer!";
       }
       const end = BigInt(Math.floor(n/2));
@@ -172,7 +172,7 @@ export default {
       if (m && isNaN(m)) {
         throw "parameter is not a number!";
       }
-      if (m<=0) {
+      if (m<0) {
         throw "parameter is not a positive integer!";
       }
       function recursive(n) {
@@ -198,10 +198,13 @@ export default {
     },
     calc() {
       try {
-        this.calcRecursive();
-        // this.calcCycle();
+        // this.calcRecursive();
+        this.calcCycle();
       } catch(e){
-        this.$message(e.message);
+        console.log('====================================');
+        console.log(e);
+        console.log('====================================');
+        this.$message(e.message || e);
       }
     }
   }

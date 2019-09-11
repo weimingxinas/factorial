@@ -42,7 +42,7 @@
       </section>
       <h3>运行</h3>
       <section class="run">
-        <el-input-number v-model="num" :min="0" :max="12000"></el-input-number>
+        <el-input-number v-model="num" :min="0" :max="15000"></el-input-number>
         <el-button type="primary" @click="calc">calc</el-button>
         <span>耗时(ms)：{{time}}</span>
         <el-input
