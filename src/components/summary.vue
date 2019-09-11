@@ -1,6 +1,5 @@
 <template>
   <div class="summary">
-    <chart :options="option"></chart>
     <h2>优化</h2>
     <h3>1. 使用worker并行执行</h3>
     <section>
@@ -28,10 +27,27 @@
     <h3>2. 此page的其他优化</h3>
     <section>
       <h4>网络</h4>
+      <ol>
+        <li>开启gzip</li>
+        <li>打包时给文件加hash使用contenthash模式，某个文件被修改了，打包后其对应文件的hash值改变，而其他文件不变。</li>
+        <li>利用http缓存</li>
+        <li>按需加载减少体积</li>
+        <li>利用resource hint(告诉浏览器如何处理资源),预加载资源</li>
+        <li>打包为es6的包，减少polyfill</li>
+      </ol>
       <h4>渲染</h4>
+      <ol>
+        <li>框架层面: 利用vue的异步更新队列，批量更新ui</li>
+        <li>语义化，让浏览器更好的理解html</li>
+      </ol>
       <h4>应用</h4>
-      <h4>存储</h4>
+      <ol>
+        <li>图表自适应,当图表所在容器大小发生改变时，会重新绘制以适应新的容器。</li>
+      </ol>
+      <p><strong>优化的策略还有很多很多，这里我们只选择最合适的。</strong></p>
     </section>
+    <h3>3. 图例</h3>
+    <chart :options="option"></chart>
   </div>
 </template>
 <script>

@@ -29,7 +29,7 @@
     </section>
     <h3>平均运行时间</h3>
     <section>
-      64ms
+      64ms(系统: win10, chrome版本:76, 内存: 16g, cpu: i5)
     </section>
     <h3>运行</h3>
     <section class="run">

@@ -11,7 +11,7 @@
     <el-tab-pane label="递归" name="third">
       <third />
     </el-tab-pane>
-    <el-tab-pane label="尾递归" name="fourth">
+    <el-tab-pane label="使用数组" name="fourth">
       <fourth />
     </el-tab-pane>
     <el-tab-pane label="总结" name="summary">
