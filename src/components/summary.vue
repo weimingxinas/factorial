@@ -1,6 +1,25 @@
 <template>
   <div class="summary">
-    <h2>优化</h2>
+    <h2>一、大数阶乘</h2>
+    <section>
+      <h3>1. 本文讲解了js中的精度问题并使用三种方式对阶乘进行处理:</h3>
+      <ol>
+        <li>递推(使用BigInt)</li>
+        <li>递归(使用BigInt)，以及爆栈时如何处理(尾递归)</li>
+        <li>使用数组保存数字的每一位，实现乘法运算并计算结果(递推)，效率较低</li>
+      </ol>
+      <p>注意! 当计算巨大的数的阶乘时（譬如100w），v8会崩溃，建议使用斯特林公式计算近似结果:
+        <a href="https://baike.baidu.com/item/%E6%96%AF%E7%89%B9%E6%9E%97%E5%85%AC%E5%BC%8F">【百度百科】</a></p>
+      <blockquote>
+        斯特林公式（Stirling's approximation）是一条用来取n的阶乘的近似值的数学公式。一般来说，当n很大的时候，
+        n阶乘的计算量十分大，所以斯特林公式十分好用，而且，即使在n很小的时候，斯特林公式的取值已经十分准确。
+        <p style="text-align:right">-- 百度百科</p>
+      </blockquote>
+      <div>
+        <img :src="stirling">
+      </div>
+    </section>
+    <h2>二、优化</h2>
     <h3>1. 使用worker并行执行</h3>
     <section>
       <p>Web Worker 的作用，就是为 JavaScript 创造多线程环境，允许主线程创建 Worker 线程，
@@ -23,6 +42,7 @@
             v-model="result">
           </el-input>
       </div>
+      <p><strong>注意! 虽然计算时间减少了，但是开启worker线程是有开销的。</strong></p>
     </section>
     <h3>2. 此page的其他优化</h3>
     <section>
@@ -46,7 +66,7 @@
       </ol>
       <p><strong>优化的策略还有很多很多，这里我们只选择最合适的。</strong></p>
     </section>
-    <h3>3. 图例</h3>
+    <h2>三、 图例（1! - 15!）</h2>
     <chart :options="option"></chart>
     <p class="mask">1! - 15!</p>
   </div>
@@ -72,6 +92,7 @@ function factorial(n){
 import 'echarts/lib/chart/line';
 import 'echarts/lib/component/tooltip';
 import chart from 'vue-echarts';
+import stirling from '@/assets/sitelin.png';
 export default {
   name: 'Summary',
   components: {
@@ -84,6 +105,7 @@ export default {
       workerTime: 0,
       mainTime: 0,
       result: '',
+      stirling,
       option: {
         grid:{
           left: '17%'

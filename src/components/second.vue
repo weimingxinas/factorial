@@ -36,7 +36,7 @@
       </section>
       <h3>运行</h3>
       <section class="run">
-        <el-input-number v-model="num" :min="1" :max="100000"></el-input-number>
+        <el-input-number v-model="num" :min="0" :max="12000"></el-input-number>
         <el-button type="primary" @click="calc">calc</el-button>
         <span>耗时(ms)：{{time}}</span>
         <el-input
@@ -76,7 +76,7 @@ export default {
       if (n && isNaN(n)) {
         throw "parameter is not a number!";
       }
-      if (n<=0) {
+      if (n<0) {
         throw "parameter is not a positive integer!";
       }
       const num = BigInt(n);

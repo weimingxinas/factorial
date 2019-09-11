@@ -12,10 +12,10 @@
               if (n && isNaN(n)) {
                 throw "parameter is not a number!";
               }
-              if (n<=0) {
+              if (n < 0) {
                 throw "parameter is not a positive integer!";
               }
-              if (n === 1) {
+              if (n === 1 || n === 0) {
                 return BigInt(1);
               }
               const num = BigInt(n);
@@ -35,7 +35,7 @@
       </section>
       <h3>运行</h3>
       <section class="run">
-        <el-input-number v-model="num" :min="1" :max="100000"></el-input-number>
+        <el-input-number v-model="num" :min="0" :max="12000"></el-input-number>
         <el-button type="primary" @click="calc">calc</el-button>
         <span>耗时(ms)：{{time}}</span>
         <el-input
@@ -64,17 +64,17 @@
       <section>
         <pre>
           <code>
-            function factorial(n){
+            function factorial(n, total = 1){
               if (!n && n !== 0) {
                 throw "No parameter exists";
               }
               if (n && isNaN(n)) {
                 throw "parameter is not a number!";
               }
-              if (n<=0) {
+              if (n < 0) {
                 throw "parameter is not a positive integer!";
               }
-              if (n === 1) return total; 
+              if (n === 1 || n === 0) return BigInt(total); 
               return factorial(n - 1, BigInt(n) * BigInt(total));
             }
             factorial(10000)
@@ -122,10 +122,10 @@ export default {
       if (n && isNaN(n)) {
         throw "parameter is not a number!";
       }
-      if (n<=0) {
+      if (n < 0) {
         throw "parameter is not a positive integer!";
       }
-      if (n === 1) {
+      if (n === 1 || n === 0) {
         return BigInt(1);
       }
       const num = BigInt(n);
