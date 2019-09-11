@@ -1,6 +1,12 @@
 <template>
   <div class="second">
-    <template v-if="supportBigint">
+    <template v-if="!supportBigint">
+      <div>
+        请使用支持BigInt类型的浏览器打开！鉴于使用BigInt比使用数组来计算，计算时间快了20倍左右，所以以下方式是使用BigInt实现的。
+        <img :src="supportBigintImg">
+      </div>
+    </template>
+    <template>
       <h3>code</h3>
       <section>
         <pre>
@@ -92,12 +98,6 @@
           <li>浏览器没部署尾调用优化: <a href="https://v8.dev/blog/modern-javascript">https://v8.dev/blog/modern-javascript</a></li>
         </ol>
       </section>
-    </template>
-    <template v-else>
-      <div>
-        请使用支持BigInt类型的浏览器打开！
-        <img :src="supportBigintImg">
-      </div>
     </template>
   </div>
 </template>

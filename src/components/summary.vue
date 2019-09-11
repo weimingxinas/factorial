@@ -42,7 +42,7 @@
             v-model="result">
           </el-input>
       </div>
-      <p><strong>注意! 虽然计算时间减少了，但是开启worker线程是有开销的。</strong></p>
+      <p><strong>注意! 虽然计算时间减少了，但是开启worker线程，主线程和worker线程之间通信是有开销的。</strong></p>
     </section>
     <h3>2. 此page的其他优化</h3>
     <section>
@@ -82,9 +82,8 @@ function factorial(n){
   if (n < 0) {
     throw "parameter is not a positive integer!";
   }
-  const num = BigInt(n);
-  let res = BigInt(1);
-  for(let i= BigInt(1);i<= num;i++){
+  let res = 1;
+  for(let i= 1;i<= n;i++){
     res = res * i;
   }
   return res;
